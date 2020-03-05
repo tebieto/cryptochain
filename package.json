@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "coverage": "jest --coverage && cat ./coverage/lcov.info | coveralls",
-  "test": "jest --watchAll",
-  "test_2": "jest"
+    "coveralls": "jest --coverage && cat ./coverage/*/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "test_": "jest",
+    "test": "jest --watchAll"
   },
   "keywords": [],
   "author": "",
@@ -14,12 +14,5 @@
   "devDependencies": {
     "coveralls": "^3.0.9",
     "jest": "^23.6.0"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-        "**/*.js",
-        "!data/keyMap.js",
-        "!/node_modules/"
-    ]
   }
 }
