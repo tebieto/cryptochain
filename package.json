@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls",
     "test_": "jest",
     "test": "jest --watchAll"
   },
