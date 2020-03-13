@@ -14,5 +14,8 @@
   "devDependencies": {
     "coveralls": "^3.0.9",
     "jest": "^23.6.0"
+  },
+  "dependencies": {
+    "hex-to-binary": "^1.0.1"
   }
 }
