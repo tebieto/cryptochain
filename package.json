@@ -6,16 +6,21 @@
   "scripts": {
     "coveralls": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "tst": "jest",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "coveralls": "^3.0.9",
-    "jest": "^23.6.0"
+    "jest": "^23.6.0",
+    "nodemon": "^2.0.2"
   },
   "dependencies": {
-    "hex-to-binary": "^1.0.1"
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "hex-to-binary": "^1.0.1",
+    "redis": "^3.0.2"
   }
 }
