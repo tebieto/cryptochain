@@ -46,7 +46,7 @@ class PubSub {
             message: JSON.stringify(this.blockchain.chain)
         });
     }
-}
+};
 
 module.exports = PubSub;
 

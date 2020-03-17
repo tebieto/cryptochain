@@ -1,5 +1,5 @@
 const Block = require('./block')
-const cryptoHash = require('./crypto-hash')
+const { cryptoHash } = require('../util/')
 
 class Blockchain {
     constructor() {
@@ -11,6 +11,7 @@ class Blockchain {
             lastBlock: this.chain[this.chain.length-1],
             data
         });
+        
         this.chain.push(newBlock);
     }
 
@@ -45,6 +46,6 @@ class Blockchain {
 
         return true;
     }
-}
+};
 
 module.exports = Blockchain;
