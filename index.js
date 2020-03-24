@@ -104,7 +104,7 @@ const syncWithRootState = () => {
 const walletFoo = new Wallet();
 const walletBar = new Wallet();
 
-const generateWalletTransaction = ({wallet, recipient, amount}) => {
+const generateWalletTransaction = ({ wallet, recipient, amount }) => {
     const transaction = wallet.createTransaction({
         recipient, amount, chain:  blockchain.chain
     });
@@ -117,11 +117,11 @@ const walletAction = () => generateWalletTransaction({
 });
 
 const walletFooAction = () => generateWalletTransaction({
-    walletFoo, recipient: walletBar.publicKey, amount: 10
+    wallet: walletFoo, recipient: walletBar.publicKey, amount: 10
 });
 
 const walletBarAction = () => generateWalletTransaction({
-    walletBar, recipient: wallet.publicKey, amount: 15
+    wallet: walletBar, recipient: wallet.publicKey, amount: 15
 });
 
 
@@ -136,6 +136,8 @@ for(let i=0; i<10; i++) {
         walletFooAction();
         walletBarAction();
     }
+
+    transactionMiner.mineTransactions()
 }
 
 let PEER_PORT;
