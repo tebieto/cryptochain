@@ -28,11 +28,11 @@ class Transaction {
     }
 
     update({ senderWallet, recipient, amount }) {
-        if(amount > this.outputMap[senderWallet.publicKey]) {
+        if (amount > this.outputMap[senderWallet.publicKey]) {
             throw new Error('Amount exceeds balance');
         }
         
-        if(!this.outputMap[recipient]) {   
+        if (!this.outputMap[recipient]) {   
             this.outputMap[recipient] = amount;
         } else {
             this.outputMap[recipient] += amount;
@@ -50,12 +50,12 @@ class Transaction {
         const outputTotal = Object.values(outputMap)
             .reduce((total, outputAmount) => total + outputAmount);
 
-        if(amount !== outputTotal) {
+        if (amount !== outputTotal) {
             console.error(`Invalid transaction form address: ${address}`);
             return false;
         }
 
-        if(!verifySignature({ publicKey: address, data: outputMap, signature })) {
+        if (!verifySignature({ publicKey: address, data: outputMap, signature })) {
             console.error(`Invalid signature from address: ${address}`);
             return false;
         }
