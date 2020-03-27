@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { FormGroup, FormControl, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import history from '../history';
-import { response } from 'express';
 
 class ConductTransaction extends Component {
     state = { recipient: '', amount: 0, knownAddresses: [] };
@@ -30,14 +29,10 @@ class ConductTransaction extends Component {
           });
     }
 
-    fetchKnownAddresses() {
+    componentDidMount() {
         fetch(`${document.location.origin}/api/known-addresses`)
             .then(response => response.json())
             .then(json => this.setState({ knownAddresses: json }));
-    }
-
-    componentDidMount() {
-        this.fetchKnownAddresses();
     }
 
     render() {
@@ -45,6 +40,21 @@ class ConductTransaction extends Component {
             <div className='ConductTransaction'>
                 <Link to='/'>Home</Link>
                 <h3>Conduct a Transaction</h3>
+
+                <h4>Known Addresses</h4>
+                {
+                   this.state.knownAddresses.map(knownAddress => {
+                       return (
+                        <div key={knownAddress}>
+                            <div className="KnownAddress">
+                                {knownAddress}
+                            </div>
+                            <br />
+                        </div>
+                       );
+                   })
+                }
+                <br />
                 <FormGroup>
                     <FormControl input="text" 
                     placeholder='recipient'

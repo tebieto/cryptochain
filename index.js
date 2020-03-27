@@ -25,6 +25,26 @@ app.get('/api/blocks', (req, res) => {
     res.json(blockchain.chain);
 });
 
+app.get('/api/blocks/length', (req, res) => {
+    res.json(blockchain.chain.length);
+});
+
+app.get('/api/blocks/:id', (req, res) => {
+   const id  = Math.abs(Number(req.params.id));
+   const { length } = blockchain.chain;
+   const blocksPerPage = 5
+   let startIndex = (id-1)*blocksPerPage;
+   let endIndex = id*blocksPerPage;
+
+   const blockReversed = blockchain.chain.slice().reverse();
+
+   startIndex = startIndex < length ? startIndex : length;
+
+   endindex = endIndex < length ? endIndex : length;
+
+   res.json(blockReversed.slice(startIndex, endIndex));
+})
+
 app.post('/api/mine', (req, res) => {
     const { data } = req.body;
 
@@ -84,8 +104,8 @@ app.get('/api/known-addresses', (req, res) => {
 
     for (let block of blockchain.chain) {
         for (let transaction of block.data) {
-            Object.keys(transaction.outputMap).forEach((wallet) => {
-                addressMap[wallet] = wallet
+            Object.keys(transaction.outputMap).forEach((address) => {
+                if(address !== wallet.publicKey) addressMap[address] = address
             });
         }
     }

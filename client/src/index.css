@@ -27,7 +27,7 @@ body {
 .Block {
     border: 1px solid #fff;
     padding: 30px 10px;
-    margin-bottom: 20px;
+    margin: 50px;
 }
 
 .Transaction {
@@ -40,5 +40,17 @@ a, a:hover {
 }
 
 .ConductTransaction, .TransactionPool {
-    margin: 100px;
+    margin: auto;
+    width: 90%;
+    max-width: 600px;
+}
+
+button {
+    margin: 5px;
+}
+
+.KnownAddress {
+    max-width: 100%;
+    word-wrap: break-word;
+    margin: auto;
 }

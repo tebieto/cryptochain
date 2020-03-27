@@ -35,7 +35,8 @@ class Blockchain {
 
     validTransactionData({ chain }) {
 
-        for (let i=1; i<chain.length; i++) {
+        let validAmount = false;
+        for (let i=chain.length-1; i>0; i--) {
             const block = chain[i];
             const transactionSet = new Set();
             let rewardTransactionCount = 0;
@@ -64,11 +65,9 @@ class Blockchain {
                         address: transaction.input.address
                     });
 
-                    console.log(transaction.input.amount, trueBalance)
 
-                    if(transaction.input.amount !== trueBalance) {
-                        console.error("Invalid input amount");
-                        return false;
+                    if(!validAmount && transaction.input.amount === trueBalance) {
+                        validAmount = true;
                     }
 
                     if (transactionSet.has(transaction)) {
@@ -79,6 +78,11 @@ class Blockchain {
                     }
                 }
             }
+        }
+
+        if(!validAmount) {
+            console.error("Invalid input amount");
+            return false;
         }
         return true;
     }
