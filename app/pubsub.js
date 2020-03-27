@@ -24,7 +24,7 @@ class PubSub {
         const validateTransactions = true;
         
         switch(channel) {
-            case (CHANNELS.BLOCKCHAIN): 
+            case (CHANNELS.BLOCKCHAIN):
             this.blockchain.replaceChain(parsedMessage, validateTransactions, () => {
                 this.transactionPool.clearBlockchainTransactions({ 
                     chain: parsedMessage 
@@ -46,7 +46,9 @@ class PubSub {
     publish({channel, message}) {
         this.subscriber.unsubscribe(channel, () => {   
             this.publisher.publish(channel, message, () => {
-                this.subscriber.subscribe(channel);
+                setTimeout(() => {    
+                    this.subscriber.subscribe(channel);
+                },1000);
             });
         });
     }

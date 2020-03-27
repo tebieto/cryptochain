@@ -174,16 +174,17 @@ describe('Blockchain', () => {
     });
 
     describe('validTransactionData()', () => {
-        let transaction, rewardTransaction, wallet;
+        let transaction, transactionBar, rewardTransaction, wallet;
 
         beforeEach(() => {
             wallet = new Wallet();
             transaction = wallet.createTransaction({ recipient: 'foo-address', amount: 65 });
+            transactionBar = wallet.createTransaction({ recipient: 'bar-address', amount: 65 });
             rewardTransaction = Transaction.rewardTransaction({ minerWallet: wallet});
         });
 
         describe('and the transaction data is valid', () => {
-            it('returns true', () => {
+            it('returns true for a single block', () => {
                 newChain.addBlock({ data: [transaction, rewardTransaction] });
 
                 expect(blockchain.validTransactionData({ chain: newChain.chain })).toBe(true);

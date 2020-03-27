@@ -64,6 +64,8 @@ class Blockchain {
                         address: transaction.input.address
                     });
 
+                    console.log(transaction.input.amount, trueBalance)
+
                     if(transaction.input.amount !== trueBalance) {
                         console.error("Invalid input amount");
                         return false;

@@ -57,7 +57,7 @@ class Block extends Component {
         const hashDisplay = `${hash.substring(0, 15)}...`;
         
         return (
-            <div className="Block">
+            <div className='Block'>
                 <div>Hash: {hashDisplay}</div>
                 <div>Timestamp: {new Date(timestamp).toLocaleString()}</div>
                 {this.displayTransaction}

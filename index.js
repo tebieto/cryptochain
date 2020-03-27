@@ -79,6 +79,20 @@ app.get('/api/wallet-info', (req, res) => {
     });
 });
 
+app.get('/api/known-addresses', (req, res) => {
+    const addressMap = {};
+
+    for (let block of blockchain.chain) {
+        for (let transaction of block.data) {
+            Object.keys(transaction.outputMap).forEach((wallet) => {
+                addressMap[wallet] = wallet
+            });
+        }
+    }
+
+    res.json(Object.keys(addressMap));
+});
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'client/dist/index.html'));
 });
@@ -124,22 +138,6 @@ const walletBarAction = () => generateWalletTransaction({
     wallet: walletBar, recipient: wallet.publicKey, amount: 15
 });
 
-
-for(let i=0; i<10; i++) {
-    if(i%3 === 0) {
-        walletAction();
-        walletFooAction();
-    } else if(i%3 === 1) {
-        walletAction();
-        walletBarAction();
-    } else {
-        walletFooAction();
-        walletBarAction();
-    }
-
-    transactionMiner.mineTransactions()
-}
-
 let PEER_PORT;
 
 if (process.env.GENERATE_PEER_PORT === 'true') {
@@ -150,6 +148,23 @@ const PORT = PEER_PORT || DEFAULT_PORT;
 
 app.listen(PORT, () => {
     console.log(`Listening on localhost:${PORT}`);
+
+    if(PORT===DEFAULT_PORT) {
+        for(let i=0; i<10; i++) {
+            if(i%3 === 0) {
+                walletAction();
+                walletFooAction();
+            } else if(i%3 === 1) {
+                walletAction();
+                walletBarAction();
+            } else {
+                walletFooAction();
+                walletBarAction();
+            }
+        
+            transactionMiner.mineTransactions()
+        }
+    }
 
     if (PORT !== DEFAULT_PORT){
        syncWithRootState();
