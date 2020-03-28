@@ -4,4 +4,4 @@
 Cryptocurrency and Blockchain Coded from scratch. 
 
 ## Powered by
-NodeJs, ExpressJs, Redis Pub/Sub and ReactJs
+NodeJs, ExpressJs, Redis Pub/Sub, Elliptic and ReactJs

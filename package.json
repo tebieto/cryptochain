@@ -7,10 +7,16 @@
     "coveralls": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "tst": "jest",
     "test": "jest --watchAll",
-    "start": "node index.js",
-    "peer": "cross-env GENERATE_PEER_PORT='true' nodemon index.js",
+    "start": "npm run build-client & node index.js",
+    "dev": "npm run tst  && cross-env ENV='development'nodemon index.js",
+    "dev-peer": "cross-env GENERATE_PEER_PORT='true' ENV='development' nodemon index.js",
     "prod": "npm run redis-server && node index.js",
-    "redis-server": "redis-server --daemonize yes"
+    "redis-server": "redis-server --daemonize yes",
+    "build-client": "parcel build client/src/index.html --out-dir client/dist",
+    "dev-client": "parcel client/src/index.html --out-dir client/dist"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "keywords": [],
   "author": "",
@@ -21,11 +27,24 @@
     "nodemon": "^2.0.2"
   },
   "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
     "body-parser": "^1.19.0",
     "cross-env": "^7.0.2",
+    "elliptic": "^6.5.2",
     "express": "^4.17.1",
     "hex-to-binary": "^1.0.1",
+    "history": "^4.10.1",
+    "parcel-bundler": "^1.12.4",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.0.0",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.1.2",
     "redis": "^3.0.2",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "uuid": "^7.0.2"
   }
 }
