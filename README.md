@@ -7,7 +7,7 @@ This is a project I started in order to master core concepts of building a fully
 MERN STACK - NodeJs, ExpressJs, Redis, Elliptic, ReactJs, Babel, Parcel, Jest, Travis CI, Heroku
 
 ## Tags
-Wallets, Transactions, Blockchain, Cryptocurrency, Cryptography
+Wallets, Transactions, Blockchain, Cryptocurrency, Cryptography, Mining, Proof of Work
 
 ## Live Peers
 * https://dry-scrubland-14620.herokuapp.com/
